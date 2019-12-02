@@ -25,14 +25,14 @@
     android:layout="@layout/los_logo"
     android:key="los_logo" />
 
-    <!-- Android version -->
+    <!-- Device name -->
     <Preference
-        android:key="os_firmware_version"
-        android:title="@string/firmware_version"
+        android:key="about_device_name"
+        android:title="@string/about_device_name"
         android:summary="@string/summary_placeholder"
         settings:enableCopying="true"
-        settings:searchable="false"
-        settings:controller="com.android.settings.deviceinfo.firmwareversion.FirmwareVersionDetailPreferenceController"/>
+        android:selectable="false"
+        settings:controller="com.android.settings.deviceinfo.firmwareversion.AboutDeviceNamePreferenceController"/>
 
     <!-- Los version -->
     <Preference
@@ -42,6 +42,15 @@
          settings:enableCopying="true"
          android:selectable="false"
          settings:controller="com.android.settings.deviceinfo.firmwareversion.LosVersionPreferenceController"/>
+
+    <!-- Android version -->
+    <Preference
+        android:key="os_firmware_version"
+        android:title="@string/firmware_version"
+        android:summary="@string/summary_placeholder"
+        settings:enableCopying="true"
+        settings:searchable="false"
+        settings:controller="com.android.settings.deviceinfo.firmwareversion.FirmwareVersionDetailPreferenceController"/>
 
     <!-- Security patch -->
     <Preference
