@@ -40,8 +40,8 @@
          android:title="@string/los_version"
          android:summary="@string/summary_placeholder"
          settings:enableCopying="true"
+         android:selectable="false"
          settings:controller="com.android.settings.deviceinfo.firmwareversion.LosVersionPreferenceController"/>
-
 
     <!-- Security patch -->
     <Preference
@@ -73,6 +73,7 @@
         android:title="@string/build_date"
         android:summary="@string/build_date_default"
         settings:enableCopying="true"
+        android:selectable="false"
         settings:controller="com.android.settings.deviceinfo.firmwareversion.BuildDatePreferenceController"/>
 
     <!-- Kernel -->
@@ -80,7 +81,6 @@
         android:key="kernel_version"
         android:title="@string/kernel_version"
         android:summary="@string/summary_placeholder"
-        android:selectable="false"
         settings:enableCopying="true"
         settings:controller="com.android.settings.deviceinfo.firmwareversion.KernelVersionPreferenceController"/>
 
