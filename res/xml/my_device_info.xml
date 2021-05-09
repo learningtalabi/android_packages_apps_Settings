@@ -31,16 +31,17 @@
     <!-- Device name -->
     <com.android.settings.widget.ValidatedEditTextPreference
         android:key="device_name"
-        android:order="1"
+        android:order="54"
         android:title="@string/my_device_info_device_name_preference_title"
         android:summary="@string/summary_placeholder"
         settings:controller="com.android.settings.deviceinfo.DeviceNamePreferenceController"
-        settings:enableCopying="true"/>
+        settings:enableCopying="true"
+        settings:isPreferenceVisible="false" />
 
     <!-- Account name -->
     <Preference
         android:key="branded_account"
-        android:order="2"
+        android:order="4"
         android:title="@string/my_device_info_account_preference_title"
         android:summary="@string/summary_placeholder"
         settings:controller="com.android.settings.deviceinfo.BrandedAccountPreferenceController"/>
@@ -50,7 +51,7 @@
         android:key="phone_number"
         android:order="3"
         android:title="@string/status_number"
-        android:summary="@string/summary_placeholder"
+         android:summary="@string/summary_placeholder"
         android:selectable="false"
         settings:controller="com.android.settings.deviceinfo.PhoneNumberPreferenceController"
         settings:enableCopying="true"/> -->
@@ -99,7 +100,7 @@
     <!-- Model & hardware -->
     <Preference
         android:key="device_model"
-        android:order="31"
+        android:order="2"
         android:title="@string/model_info"
         android:summary="@string/summary_placeholder"
         android:fragment="com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFragment"
@@ -120,7 +121,7 @@
     <!-- Android version -->
     <Preference
         android:key="firmware_version"
-        android:order="42"
+        android:order="1"
         android:title="@string/firmware_version"
         android:summary="@string/summary_placeholder"
         android:fragment="com.android.settings.deviceinfo.firmwareversion.FirmwareVersionSettings"
@@ -206,7 +207,7 @@
     <!-- SELinux status information -->
     <Preference
         android:key="selinux_status"
-        android:order="54"
+        android:order="3"
         android:title="@string/selinux_status"
         android:summary="@string/selinux_status_enforcing"/>
 

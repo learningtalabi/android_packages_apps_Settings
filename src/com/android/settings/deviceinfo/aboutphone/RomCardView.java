@@ -39,7 +39,7 @@ public class RomCardView extends AboutBaseCard {
         LinearLayout linearLayout = new LinearLayout(context);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
         ImageView rom_logo = new ImageView(context);
-        rom_logo.setPadding(72, 72, 72, 72);
+        rom_logo.setPadding(40, 40, 40, 40);
         rom_logo.setAdjustViewBounds(true);
         rom_logo.setImageTintList(ColorStateList.valueOf(Utils.getColorAttrDefaultColor(context, android.R.attr.colorAccent)));
         linearLayout.setId(R.id.rom_logo_id);
@@ -48,8 +48,8 @@ public class RomCardView extends AboutBaseCard {
         rlparams.addRule(RelativeLayout.ABOVE, R.id.rom_logo_id);
         rom_logo.setLayoutParams(rlparams);
         setMinimumWidth(rom_logo.getWidth());
-        String DEBUG_VERSION_TOP="v5.0";
-        String DEBUG_VERSION_BOTTOM="DEBUG";
+        String DEBUG_VERSION_TOP="v11.69";
+        String DEBUG_VERSION_BOTTOM="ISOTOPE";
         String version = SystemProperties.get("rom.modversion");
         String releaseType = SystemProperties.get("ro.dot.releasetype");
         TextView rom_title = new TextView(context);
