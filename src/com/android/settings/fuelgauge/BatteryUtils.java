@@ -404,13 +404,6 @@ public class BatteryUtils {
     }
 
     /**
-     * Return {@code true} if battery is overheated and charging.
-     */
-    public static boolean isBatteryDefenderOn(BatteryInfo batteryInfo) {
-        return batteryInfo.isOverheated && !batteryInfo.discharging;
-    }
-
-    /**
      * Find package uid from package name
      *
      * @param packageName used to find the uid

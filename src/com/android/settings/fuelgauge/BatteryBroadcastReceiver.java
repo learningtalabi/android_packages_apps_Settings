@@ -20,7 +20,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.BatteryManager;
 import android.os.PowerManager;
 import android.util.Log;
 
@@ -40,7 +39,6 @@ import java.lang.annotation.RetentionPolicy;
  * 1. Battery level(e.g. 100%->99%)
  * 2. Battery status(e.g. plugged->unplugged)
  * 3. Battery saver(e.g. off->on)
- * 4. Battery health(e.g. good->overheat)
  */
 public class BatteryBroadcastReceiver extends BroadcastReceiver {
 
@@ -51,7 +49,6 @@ public class BatteryBroadcastReceiver extends BroadcastReceiver {
      * Battery level(e.g. 100%->99%)
      * Battery status(e.g. plugged->unplugged)
      * Battery saver(e.g. off->on)
-     * Battery health(e.g. good->overheat)
      */
     public interface OnBatteryChangedListener {
         void onBatteryChanged(@BatteryUpdateType int type);
@@ -62,23 +59,19 @@ public class BatteryBroadcastReceiver extends BroadcastReceiver {
             BatteryUpdateType.BATTERY_LEVEL,
             BatteryUpdateType.BATTERY_SAVER,
             BatteryUpdateType.BATTERY_STATUS,
-            BatteryUpdateType.BATTERY_HEALTH,
             BatteryUpdateType.BATTERY_NOT_PRESENT})
     public @interface BatteryUpdateType {
         int MANUAL = 0;
         int BATTERY_LEVEL = 1;
         int BATTERY_SAVER = 2;
         int BATTERY_STATUS = 3;
-        int BATTERY_HEALTH = 4;
-        int BATTERY_NOT_PRESENT = 5;
+        int BATTERY_NOT_PRESENT = 4;
     }
 
     @VisibleForTesting
     String mBatteryLevel;
     @VisibleForTesting
     String mBatteryStatus;
-    @VisibleForTesting
-    int mBatteryHealth;
     private OnBatteryChangedListener mBatteryListener;
     private Context mContext;
 
@@ -113,15 +106,11 @@ public class BatteryBroadcastReceiver extends BroadcastReceiver {
             if (Intent.ACTION_BATTERY_CHANGED.equals(intent.getAction())) {
                 final String batteryLevel = Utils.getBatteryPercentage(intent);
                 final String batteryStatus = Utils.getBatteryStatus(mContext, intent);
-                final int batteryHealth = intent.getIntExtra(
-                        BatteryManager.EXTRA_HEALTH, BatteryManager.BATTERY_HEALTH_UNKNOWN);
                 if (!Utils.isBatteryPresent(intent)) {
                     Log.w(TAG, "Problem reading the battery meter.");
                     mBatteryListener.onBatteryChanged(BatteryUpdateType.BATTERY_NOT_PRESENT);
                 } else if (forceUpdate) {
                     mBatteryListener.onBatteryChanged(BatteryUpdateType.MANUAL);
-                } else if (batteryHealth != mBatteryHealth) {
-                    mBatteryListener.onBatteryChanged(BatteryUpdateType.BATTERY_HEALTH);
                 } else if(!batteryLevel.equals(mBatteryLevel)) {
                     mBatteryListener.onBatteryChanged(BatteryUpdateType.BATTERY_LEVEL);
                 } else if (!batteryStatus.equals(mBatteryStatus)) {
@@ -129,7 +118,6 @@ public class BatteryBroadcastReceiver extends BroadcastReceiver {
                 }
                 mBatteryLevel = batteryLevel;
                 mBatteryStatus = batteryStatus;
-                mBatteryHealth = batteryHealth;
             } else if (PowerManager.ACTION_POWER_SAVE_MODE_CHANGED.equals(intent.getAction())) {
                 mBatteryListener.onBatteryChanged(BatteryUpdateType.BATTERY_SAVER);
             }

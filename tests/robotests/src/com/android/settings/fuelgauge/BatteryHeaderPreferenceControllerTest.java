@@ -176,15 +176,6 @@ public class BatteryHeaderPreferenceControllerTest {
     }
 
     @Test
-    public void updatePreference_isOverheat_showEmptyText() {
-        mBatteryInfo.isOverheated = true;
-
-        mController.updateHeaderPreference(mBatteryInfo);
-
-        assertThat(mSummary.getText().toString().isEmpty()).isTrue();
-    }
-
-    @Test
     public void onStart_shouldStyleActionBar() {
         when(mEntityHeaderController.setRecyclerView(nullable(RecyclerView.class), eq(mLifecycle)))
                 .thenReturn(mEntityHeaderController);
