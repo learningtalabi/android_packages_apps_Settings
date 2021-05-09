@@ -24,8 +24,6 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 
-import com.android.settings.R;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -67,13 +65,5 @@ public class TopLevelBatteryPreferenceControllerTest {
         info.discharging = false;
         info.chargeLabel = "5% - charging";
         assertThat(getDashboardLabel(mContext, info)).isEqualTo("5% - charging");
-    }
-
-    @Test
-    public void getSummary_batteryNotPresent_shouldShowWarningMessage() {
-        mController.mIsBatteryPresent = false;
-
-        assertThat(mController.getSummary())
-                .isEqualTo(mContext.getString(R.string.battery_missing_message));
     }
 }

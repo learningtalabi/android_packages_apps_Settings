@@ -95,19 +95,6 @@ public class BatteryBroadcastReceiverTest {
             BatteryFixSliceTest.ShadowBatteryStatsHelperLoader.class,
             BatteryFixSliceTest.ShadowBatteryTipLoader.class
     })
-    public void onReceive_batteryNotPresent_shouldShowHelpMessage() {
-        mChargingIntent.putExtra(BatteryManager.EXTRA_PRESENT, false);
-
-        mBatteryBroadcastReceiver.onReceive(mContext, mChargingIntent);
-
-        verify(mBatteryListener).onBatteryChanged(BatteryUpdateType.BATTERY_NOT_PRESENT);
-    }
-
-    @Test
-    @Config(shadows = {
-            BatteryFixSliceTest.ShadowBatteryStatsHelperLoader.class,
-            BatteryFixSliceTest.ShadowBatteryTipLoader.class
-    })
     public void testOnReceive_powerSaveModeChanged_listenerInvoked() {
         mBatteryBroadcastReceiver.onReceive(mContext,
                 new Intent(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED));

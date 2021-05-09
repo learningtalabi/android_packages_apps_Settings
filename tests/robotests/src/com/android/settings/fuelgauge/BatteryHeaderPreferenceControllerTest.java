@@ -44,7 +44,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
-import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.widget.LayoutPreference;
@@ -62,7 +61,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowPowerManager;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowEntityHeaderController.class, ShadowUtils.class})
+@Config(shadows = ShadowEntityHeaderController.class)
 public class BatteryHeaderPreferenceControllerTest {
 
     private static final String PREF_KEY = "battery_header";
@@ -117,7 +116,7 @@ public class BatteryHeaderPreferenceControllerTest {
 
         mPowerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
 
-        mController = spy(new BatteryHeaderPreferenceController(mContext, PREF_KEY));
+        mController = new BatteryHeaderPreferenceController(mContext, PREF_KEY);
         mLifecycle.addObserver(mController);
         mController.setActivity(mActivity);
         mController.setFragment(mPreferenceFragment);
@@ -130,7 +129,6 @@ public class BatteryHeaderPreferenceControllerTest {
     @After
     public void tearDown() {
         ShadowEntityHeaderController.reset();
-        ShadowUtils.reset();
     }
 
     @Test
@@ -215,14 +213,5 @@ public class BatteryHeaderPreferenceControllerTest {
     public void getAvailabilityStatus_returnAvailableUnsearchable() {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.AVAILABLE_UNSEARCHABLE);
-    }
-
-    @Test
-    public void displayPreference_batteryNotPresent_shouldShowHelpMessage() {
-        ShadowUtils.setIsBatteryPresent(false);
-
-        mController.displayPreference(mPreferenceScreen);
-
-        verify(mController).showHelpMessage();
     }
 }
