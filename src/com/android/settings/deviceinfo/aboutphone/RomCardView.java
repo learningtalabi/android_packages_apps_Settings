@@ -49,7 +49,7 @@ public class RomCardView extends AboutBaseCard {
         rom_logo.setLayoutParams(rlparams);
         setMinimumWidth(rom_logo.getWidth());
         String DEBUG_VERSION_TOP="v11.69";
-        String DEBUG_VERSION_BOTTOM="ISOTOPE";
+        String DEBUG_VERSION_BOTTOM="ISOBAR";
         String version = SystemProperties.get("rom.modversion");
         String releaseType = SystemProperties.get("ro.dot.releasetype");
         TextView rom_title = new TextView(context);
